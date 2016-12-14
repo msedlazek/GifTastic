@@ -27,24 +27,32 @@ $("document").ready(function(){
 		e.preventDefault();
 	});
 	
-	// $("button").on("click", function(){
-	// 	var searchTopic = $(this).val();
-	// 	var queryUrl = "http://api.giphy.com/v1/gifs/search?q=" + searchTopic + "&api_key=dc6zaTOxFJmzC&limit=10";
+	// This is our ajax query.
+	$("button").on("click", function(){
+		var searchTopic = $(this).val();
+		var queryUrl = "http://api.giphy.com/v1/gifs/search?q=" + searchTopic + "&api_key=dc6zaTOxFJmzC&limit=10";
 
-	// 	$.ajax({
- //        	url: queryURL,
- //        	method: "GET"
- //      	}).done(function(response) {
- //      		console.log(response);
- //      	})
+		$.ajax({
+        	url: queryUrl,
+        	method: "GET"
+      	}).done(function(response) {
+      		console.log(response);
+      		var results = response.data
+      		for (var j = 0; j < results.length; j++) {
+      			var gifDiv = $("<div>");
+      			var rating = results[j].rating
+      			var p = $("<p>").text("Rating: " + rating);
+      			var topicImage = $("<img>");
+            	topicImage.attr("src", results[j].images.fixed_height.url);
+            	gifDiv.prepend(p);
+            	gifDiv.prepend(topicImage);
 
-	// });
+            	$("#topicGifs").prepend(gifDiv);
+      		}
+      	});
 
+	});
 
-
-	// $("input").on("click", function(){
-	// 	alert("hi");
-	// });
 
 })
 
