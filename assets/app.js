@@ -4,7 +4,9 @@ $("document").ready(function(){
 
 	var topics = ["Guns", "Fantasy", "Cyberpunk"]
 	
-	makeButtons();
+	newTopics();
+
+	
 
 	function makeButtons(){
 		for (var i = 0; i < topics.length; i++) {
@@ -17,13 +19,16 @@ $("document").ready(function(){
 
 	function newTopics(){
 		$("#topicButtons").empty();
-	}
+		makeButtons();
+	};
+
+	
 
 	$("#addTopic").on("click", function(e){
 		var addedTopic = $("#topic-input").val();
 		topics.push(addedTopic);
 		newTopics();
-		makeButtons();
+		// return false;
 		e.preventDefault();
 	});
 	
@@ -43,7 +48,7 @@ $("document").ready(function(){
       			var rating = results[j].rating
       			var p = $("<p>").text("Rating: " + rating);
       			var topicImage = $("<img>");
-            	topicImage.attr("src", results[j].images.fixed_height.url);
+            	topicImage.attr("src", results[j].images.fixed_height_still.url);
             	gifDiv.prepend(p);
             	gifDiv.prepend(topicImage);
 
@@ -53,8 +58,13 @@ $("document").ready(function(){
 
 	});
 
+	// $("img").on("click", function(){
+	// 	if (){
 
-})
+	// 	}
+	// });
+
+});
 
 // rating???
 // if (rating == g )
